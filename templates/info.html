@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+    <div>
+        <p> Info for user: <strong>{{.Name}}</strong></p>
+        <p> User email: <strong> {{.Email}} </strong></p>
+        <p> Repositories: </p>
+        <table>
+        {{range .Repositories}}
+            <tr>
+                <td>{{.RepoName}}</td>
+                <td>
+                {{range $key, $value := .Languages}}
+                     {{$key}} - {{$value}} %
+                {{end}}
+                </td>
+            </tr>
+        {{end}}
+        </table>
+    </div>
+</body>
+</html>
