@@ -1,22 +1,22 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"github.com/gorilla/mux"
+	"golang.org/x/net/context"
+	"google.golang.org/appengine"
 	"html/template"
-	"log"
 	"net/http"
 	"path/filepath"
 )
 
-func main() {
+func init() {
 	muxRouter := mux.NewRouter()
 	muxRouter.HandleFunc("/", handleMain).Methods("GET")
 	muxRouter.HandleFunc("/{userName}", handleUserInfoGet).Methods("GET")
 	muxRouter.HandleFunc("/info", handleUserInfoPost).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":8080", muxRouter))
+	http.Handle("/", muxRouter)
 }
 
 func handleMain(w http.ResponseWriter, r *http.Request) {
@@ -27,17 +27,19 @@ func handleMain(w http.ResponseWriter, r *http.Request) {
 
 func handleUserInfoGet(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
+	ctx := appengine.NewContext(r)
 
-	userInfo(w, vars["userName"])
+	userInfo(w, ctx, vars["userName"])
 }
 
 func handleUserInfoPost(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	userInfo(w, r.Form.Get("userName"))
+	ctx := appengine.NewContext(r)
+
+	userInfo(w, ctx, r.Form.Get("userName"))
 }
 
-func userInfo(w http.ResponseWriter, userName string) {
-	ctx := context.Background()
+func userInfo(w http.ResponseWriter, ctx context.Context, userName string) {
 	client := NewClient(NewToken(), ctx)
 
 	account := NewAccount(userName)

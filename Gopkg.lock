@@ -52,10 +52,13 @@
 [[projects]]
   name = "google.golang.org/appengine"
   packages = [
+    ".",
     "internal",
+    "internal/app_identity",
     "internal/base",
     "internal/datastore",
     "internal/log",
+    "internal/modules",
     "internal/remote_api",
     "internal/urlfetch",
     "urlfetch"
@@ -66,6 +69,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "42b75ea44713b657dc1c407e9a4dd986c05576fe5c9ceec4dcc54fd0d64d5ec5"
+  inputs-digest = "cc009c10746fefcabc4264a0c7f85ced985f21a7856ab977645eade68f39e9d6"
   solver-name = "gps-cdcl"
   solver-version = 1
