@@ -8,7 +8,7 @@ type InfoPage struct {
 
 type PublicRepository struct {
 	RepoName  string
-	Languages map[string]int
+	Languages map[string]string
 }
 
 type ErrorPage struct {
@@ -20,7 +20,7 @@ func NewInfoPage(account *Account) InfoPage {
 	for _, repo := range account.GetRepositories() {
 		lang, err := account.GetRepositoryLanguage(repo)
 		if err != nil {
-			lang = map[string]int{"undefined": 0}
+			lang = map[string]string{"undefined": "0"}
 		}
 		repositories = append(repositories, PublicRepository{
 			RepoName:  repo,
