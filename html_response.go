@@ -15,6 +15,7 @@ type ErrorPage struct {
 	ErrorInfo string
 }
 
+// Create struct with data to display on info page
 func NewInfoPage(account *Account) InfoPage {
 	repositories := []PublicRepository{}
 	for _, repo := range account.GetRepositories() {
@@ -35,6 +36,7 @@ func NewInfoPage(account *Account) InfoPage {
 	}
 }
 
+// Create data for error page
 func NewErrorPage(info string) ErrorPage {
 	return ErrorPage{
 		ErrorInfo: info,

@@ -17,6 +17,7 @@ type TokenFile struct {
 	Token string `json:"token"`
 }
 
+// Return token struct with token necessary to connect with github API
 func NewToken() *TokenProvider {
 	return &TokenProvider{
 		token: readFromFile(),

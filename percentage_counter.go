@@ -12,6 +12,7 @@ type LanguageItem struct {
 	percentage string
 }
 
+// Create data struct to count percentege language statistic
 func NewLanguageData() *LanguageData {
 	data := make(map[string]*LanguageItem)
 
@@ -21,6 +22,7 @@ func NewLanguageData() *LanguageData {
 	}
 }
 
+// Add item to count languages statistic for all repository
 func (ld *LanguageData) AddLanguageItem(name string, bytes int) {
 	ld.sum += bytes
 	ld.languages[name] = &LanguageItem{
@@ -28,6 +30,7 @@ func (ld *LanguageData) AddLanguageItem(name string, bytes int) {
 	}
 }
 
+// Run counting of percentege language statistic
 func (ld *LanguageData) CountPercentage() {
 	for _, lang := range ld.languages {
 		lang.percentage = count(lang.bytes, ld.sum)
@@ -38,6 +41,7 @@ func count(bytes int, sum int) string {
 	return fmt.Sprintf("%.2f", (float64(bytes) / float64(sum) * 100))
 }
 
+// Return counted statistic for specific language
 func (ld LanguageData) GetPercentege(name string) string {
 	for langName, lang := range ld.languages {
 		if langName == name {

@@ -29,16 +29,19 @@ type Language struct {
 	percentage      string
 }
 
+// Create new account user struct from the passed name
 func NewAccount(userName string) *Account {
 	return &Account{
 		name: userName,
 	}
 }
 
+// Return account user name
 func (a Account) UserName() string {
 	return a.name
 }
 
+// Return account email, it could be also empty string
 func (a Account) GetEmail() string {
 	return a.email
 }
@@ -51,6 +54,7 @@ func (r Repository) GetName() string {
 	return r.name
 }
 
+// Add user repository with language statistic
 func (a *Account) AddRepository(repo RepositoryProvider, languages map[string]int) {
 	RepoLang := []*Language{}
 	for lang, byteAmount := range languages {
@@ -67,6 +71,7 @@ func (a *Account) AddRepository(repo RepositoryProvider, languages map[string]in
 	})
 }
 
+// Return all repositories names
 func (a Account) GetRepositories() []string {
 	var repositories []string
 
@@ -77,6 +82,7 @@ func (a Account) GetRepositories() []string {
 	return repositories
 }
 
+// Return languages statistic of repository based on repository name
 func (a Account) GetRepositoryLanguage(name string) (map[string]string, error) {
 	repo, err := a.findRepositoryByName(name)
 	if err != nil {

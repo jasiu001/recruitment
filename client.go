@@ -6,6 +6,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
+// Return new client to connect with github API
 func NewClient(token *TokenProvider, ctx context.Context) *github.Client {
 
 	tokenService := oauth2.StaticTokenSource(
